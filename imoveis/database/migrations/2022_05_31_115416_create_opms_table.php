@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('sigla');
 
-            $table->foreignId('opm_id')->constrained('opms')->nullable();
+            $table->foreignId('opm_id')->nullable()->constrained('opms');
             $table->foreignId('imovel_id')->constrained('imoveis');
 
             $table->timestamps();

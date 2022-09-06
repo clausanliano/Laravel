@@ -5,82 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\Opm;
 use App\Http\Requests\StoreOpmRequest;
 use App\Http\Requests\UpdateOpmRequest;
+use App\Models\Imovel;
 
 class OpmController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $collection = Opm::all();
+        return view('opm.index')->with(compact('collection'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $objeto = new Opm();
+        $opms = Opm::all();
+        $imoveis = Imovel::all();
+        return view('opm.edit')->with(compact('objeto', 'opms', 'imoveis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreOpmRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreOpmRequest $request)
     {
-        //
+        Opm::create($request->validated());
+        return redirect(route('opm.index'))->with(['mensagem' => 'Registro CRIADO com sucesso']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Opm  $opm
-     * @return \Illuminate\Http\Response
-     */
     public function show(Opm $opm)
     {
-        //
+        $objeto = $opm;
+        return view('opm.show')->with(compact('objeto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Opm  $opm
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Opm $opm)
     {
-        //
+        $objeto = $opm;
+        $opms = Opm::all();
+        $imoveis = Imovel::all();
+        return view('opm.edit')->with(compact('objeto', 'opms', 'imoveis'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOpmRequest  $request
-     * @param  \App\Models\Opm  $opm
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateOpmRequest $request, Opm $opm)
     {
-        //
+        $opm->update($request->validated());
+        return redirect(route('opm.index'))->with(['mensagem' => 'Registro CRIADO com sucesso']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Opm  $opm
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Opm $opm)
     {
-        //
+        $opm->delete();
+        return redirect(route('opm.index'))->with(['mensagem' => 'Registro CRIADO com sucesso']);
     }
 }

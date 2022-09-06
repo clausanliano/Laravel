@@ -258,6 +258,11 @@ return [
             'text' => 'Imóvel',
             'url'  => 'imovel',
         ],
+        [
+            'text' => 'OPM',
+            'url'  => 'opm',
+            'icon'        => 'fa fa-university',
+        ],
 
         [
             'text' => 'blog',
